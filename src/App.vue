@@ -1,19 +1,16 @@
 <template>
   <div id="app">
-    <h1>title</h1>
-    <!-- 根级路由出⼝ -->
-    <router-view />
+    <!-- 根路由出口 -->
+    <router-view/>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
+
 export default Vue.extend({
-  data () {
-    return {}
-  }
+  name: 'App'
 })
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>
