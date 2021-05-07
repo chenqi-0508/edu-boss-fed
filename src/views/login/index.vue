@@ -16,19 +16,32 @@
 
 <script lang="ts">
 import Vue from 'vue'
+import qs from 'qs'
+
 export default Vue.extend({
   data () {
     return {
       form: {
-        phone: '',
-        password: ''
+        phone: '18201288771',
+        password: '111111'
       }
     }
   },
 
   methods: {
-    loginHandle (): void {
-      console.log('object')
+    async loginHandle () {
+      const { data } = await (this as any).$request({
+        method: 'POST',
+        url: '/front/user/login',
+        data: qs.stringify(this.form)
+      })
+      if (data.state !== 1 && data.state !== 200) {
+        this.$message({
+          showClose: true,
+          message: data.message,
+          type: 'error'
+        })
+      }
     }
   }
 })
