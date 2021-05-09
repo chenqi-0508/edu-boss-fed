@@ -1,12 +1,6 @@
 import axios from 'axios'
-import Vue from 'vue'
 
-const request = axios.create({
-  // baseURL: '/front'
-  headers: {
-    'content-type': 'application/x-www-form-urlencoded'
-  }
-})
+const request = axios.create()
 
 // 添加请求拦截器
 request.interceptors.request.use(function (config) {

@@ -2,7 +2,7 @@
   <el-container class="wrapper">
     <app-sidebar />
     <el-container direction="vertical">
-      <app-navbar />
+      <app-navbar @logout="logout" />
       <el-main>
         <router-view />
       </el-main>
@@ -11,17 +11,27 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator'
+import Vue from 'vue'
 import AppSidebar from './components/sidebar.vue'
 import AppNavbar from './components/navbar.vue'
-@Component({
-  name: 'Tets',
+
+export default Vue.extend({
   components: {
     AppSidebar,
     AppNavbar
+  },
+  methods: {
+    logout (): void {
+      console.log('logout')
+      // 清除缓存登录信息
+      this.$store.commit('removeUser')
+      // 返回登录页面
+      this.$router.push({
+        name: 'login'
+      })
+    }
   }
 })
-export default class Test extends Vue {}
 </script>
 
 <style lang="scss" scoped>

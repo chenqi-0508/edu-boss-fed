@@ -17,19 +17,27 @@
         src="https://edu-lagou.oss-cn-beijing.aliyuncs.com/images/2020/07/10/15943594999396473.png"
       />
       <el-dropdown-menu slot="dropdown">
-        <el-dropdown-item command="profile">Admin</el-dropdown-item>
-        <el-dropdown-item command="logout" divided>登出</el-dropdown-item>
+        <el-dropdown-item command="profile">
+          <span>Admin</span>
+        </el-dropdown-item>
+        <el-dropdown-item command="logout" divided>
+          <span @click="logoutHandle">登出</span>
+        </el-dropdown-item>
       </el-dropdown-menu>
     </el-dropdown>
   </el-header>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator'
-@Component({
-  name: 'AppAside'
+import Vue from 'vue'
+export default Vue.extend({
+  methods: {
+    logoutHandle (): void {
+      console.log('logoutHandle')
+      this.$emit('logout')
+    }
+  }
 })
-export default class Test extends Vue {}
 </script>
 
 <style lang="scss" scoped>
