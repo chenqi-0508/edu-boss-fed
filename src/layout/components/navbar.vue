@@ -18,10 +18,10 @@
       />
       <el-dropdown-menu slot="dropdown">
         <el-dropdown-item command="profile">
-          <span>{{ userInfo.userName }}</span>
+          {{ userInfo.userName }}
         </el-dropdown-item>
-        <el-dropdown-item command="logout" divided>
-          <span @click="logoutHandle">登出</span>
+        <el-dropdown-item command="logout" @click.native="logoutHandle" divided>
+          登出
         </el-dropdown-item>
       </el-dropdown-menu>
     </el-dropdown>
@@ -44,7 +44,12 @@ export default Vue.extend({
   methods: {
     logoutHandle (): void {
       console.log('logoutHandle')
-      this.$emit('logout')
+      // 清除缓存登录信息
+      this.$store.commit('removeUser')
+      // 返回登录页面
+      this.$router.push({
+        name: 'login'
+      }).catch(err => err)
     },
     async getUserInfoHandle () {
       const { data } = await getUserInfo()

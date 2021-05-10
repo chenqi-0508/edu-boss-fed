@@ -2,7 +2,7 @@
   <el-container class="wrapper">
     <app-sidebar />
     <el-container direction="vertical">
-      <app-navbar @logout="logout" />
+      <app-navbar />
       <el-main>
         <router-view />
       </el-main>
@@ -19,17 +19,6 @@ export default Vue.extend({
   components: {
     AppSidebar,
     AppNavbar
-  },
-  methods: {
-    logout (): void {
-      console.log('logout')
-      // 清除缓存登录信息
-      this.$store.commit('removeUser')
-      // 返回登录页面
-      this.$router.push({
-        name: 'login'
-      })
-    }
   }
 })
 </script>
