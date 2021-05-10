@@ -14,11 +14,11 @@
     <el-dropdown>
       <img
         class="avatar"
-        src="https://edu-lagou.oss-cn-beijing.aliyuncs.com/images/2020/07/10/15943594999396473.png"
+        :src="userInfo.portrait"
       />
       <el-dropdown-menu slot="dropdown">
         <el-dropdown-item command="profile">
-          <span>Admin</span>
+          <span>{{ userInfo.userName }}</span>
         </el-dropdown-item>
         <el-dropdown-item command="logout" divided>
           <span @click="logoutHandle">登出</span>
@@ -30,11 +30,26 @@
 
 <script lang="ts">
 import Vue from 'vue'
+import { getUserInfo } from '@/services/user'
+
 export default Vue.extend({
+  data () {
+    return {
+      userInfo: {}
+    }
+  },
+  created () {
+    this.getUserInfoHandle()
+  },
   methods: {
     logoutHandle (): void {
       console.log('logoutHandle')
       this.$emit('logout')
+    },
+    async getUserInfoHandle () {
+      const { data } = await getUserInfo()
+      console.log(data)
+      this.userInfo = data.content
     }
   }
 })

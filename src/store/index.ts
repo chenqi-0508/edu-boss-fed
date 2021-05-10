@@ -5,7 +5,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    user: JSON.stringify(window.localStorage.getItem('user') || 'null')
+    user: JSON.parse(window.localStorage.getItem('user') || 'null')
   },
   mutations: {
     setUser (state, payload) {
@@ -13,8 +13,8 @@ export default new Vuex.Store({
       window.localStorage.setItem('user', payload)
     },
     removeUser (state, payload) {
-      state.user = 'null'
-      window.localStorage.setItem('user', '')
+      state.user = null
+      window.localStorage.removeItem('user')
     }
   },
   actions: {

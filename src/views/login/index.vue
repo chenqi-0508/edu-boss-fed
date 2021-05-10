@@ -72,11 +72,9 @@ export default Vue.extend({
             message: data.message,
             type: 'success'
           })
-          this.$router.push({
-            name: 'home'
-          })
           // 将登录信息全局保存
           this.$store.commit('setUser', data.content)
+          this.$router.push(this.$route.query.redirect as string || '/')
         }
       } catch (error) {
         console.log('error submit!!', error)
