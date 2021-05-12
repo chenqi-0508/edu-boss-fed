@@ -23,3 +23,37 @@ export const createOrUpdateMenu = (data: Menu) => {
     data
   })
 }
+
+/**
+ * 获取所有菜单并按层级展示
+ * @returns
+ */
+export const getMenuInfo = () => {
+  return request({
+    method: 'GET',
+    url: '/boss/menu/getMenuNodeList'
+  })
+}
+
+/**
+ * 获取所有菜单
+ * @returns
+ */
+export const getAllMenuInfo = () => {
+  return request({
+    method: 'GET',
+    url: '/boss/menu/getAll'
+  })
+}
+
+/**
+ * 删除菜单
+ * @param id 菜单id
+ * @returns
+ */
+export const deleteMenu = (id: number) => {
+  return request({
+    method: 'DELETE',
+    url: '/boss/menu/' + id
+  })
+}

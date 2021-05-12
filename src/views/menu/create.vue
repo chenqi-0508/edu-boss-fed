@@ -12,9 +12,14 @@
           <el-input v-model="form.href"></el-input>
         </el-form-item>
         <el-form-item label="上级菜单">
-          <el-select v-model="form.region" placeholder="请选择活动区域">
-            <el-option label="区域一" value="shanghai"></el-option>
-            <el-option label="区域二" value="beijing"></el-option>
+          <el-select v-model="form.parentId" placeholder="请选择上级菜单">
+            <el-option label="无上级菜单" :value="-1"></el-option>
+            <el-option
+             :label="item.name"
+             :value="item.id"
+             v-for="item in parentMenuList"
+             :key="item.id"
+            ></el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="描述">
@@ -40,7 +45,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { createOrUpdateMenu } from '@/services/menu'
+import { createOrUpdateMenu, getMenuInfo } from '@/services/menu'
 
 export default Vue.extend({
   name: 'create-menu',
@@ -54,15 +59,36 @@ export default Vue.extend({
         orderNum: 4,
         description: '5',
         shown: false
-      }
+      },
+      parentMenuList: []
     }
   },
+  created () {
+    this.loadMenuInfo()
+  },
   methods: {
+    /**
+     * 提交
+     */
     async onSubmit () {
       console.log('submit!')
       const { data } = await createOrUpdateMenu(this.form)
       console.log(data)
+      if (data.code === '000000') {
+        this.$message.success('添加成功！')
+        this.$router.back()
+      }
     },
+    /**
+     * 获取一级菜单列表
+     */
+    async loadMenuInfo () {
+      const { data } = await getMenuInfo()
+      if (data.code === '000000') {
+        this.parentMenuList = data.data
+      }
+    },
+
     handleChange () {
       console.log('handleChange!')
     }
