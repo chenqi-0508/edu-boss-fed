@@ -5,13 +5,9 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator'
-@Component({
-  name: 'Tets'
+import Vue from 'vue'
+export default Vue.extend({
 })
-export default class Test extends Vue {
-
-}
 </script>
 
 <style lang="scss" scoped>

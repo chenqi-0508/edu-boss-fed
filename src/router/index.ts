@@ -34,6 +34,12 @@ const routes: Array<RouteConfig> = [
         meta: { requiresAuth: true }
       },
       {
+        path: '/menu/create',
+        name: 'create-menu',
+        component: () => import(/* webpackChunkName: 'create-menu' */ '@/views/menu/create.vue'),
+        meta: { requiresAuth: true }
+      },
+      {
         path: '/resource',
         name: 'resource',
         component: () => import(/* webpackChunkName: 'resource' */ '@/views/resource/index.vue'),
