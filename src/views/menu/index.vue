@@ -46,7 +46,7 @@ export default Vue.extend({
      */
     createMenu () {
       this.$router.push({
-        name: 'create-menu'
+        name: 'MenuCreate'
       })
     },
     /**
@@ -57,6 +57,17 @@ export default Vue.extend({
       if (data.code === '000000') {
         this.tableData = data.data
       }
+    },
+    /**
+     * 编辑菜单
+     */
+    handleEdit (row: any) {
+      this.$router.push({
+        name: 'MenuEdit',
+        params: {
+          id: row.id
+        }
+      })
     },
     /**
      * 删除菜单

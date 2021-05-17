@@ -1,19 +1,22 @@
 <template>
-    <div>
-      <h1>resource</h1>
-    </div>
+  <list />
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator'
-@Component({
-  name: 'Tets'
-})
-export default class Test extends Vue {
+import Vue from 'vue'
+import List from './components/List.vue'
 
-}
+export default Vue.extend({
+  name: 'ResourceIndex',
+  components: {
+    List
+  },
+  data () {
+    return {
+    }
+  }
+})
 </script>
 
 <style lang="scss" scoped>
-
 </style>

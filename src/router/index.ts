@@ -29,20 +29,26 @@ const routes: Array<RouteConfig> = [
       },
       {
         path: '/menu',
-        name: 'menu',
-        component: () => import(/* webpackChunkName: 'menu' */ '@/views/menu/index.vue'),
+        name: 'MenuIndex',
+        component: () => import(/* webpackChunkName: 'MenuIndex' */ '@/views/menu/index.vue'),
         meta: { requiresAuth: true }
       },
       {
         path: '/menu/create',
-        name: 'create-menu',
-        component: () => import(/* webpackChunkName: 'create-menu' */ '@/views/menu/create.vue'),
+        name: 'MenuCreate',
+        component: () => import(/* webpackChunkName: 'MenuCreate' */ '@/views/menu/create.vue'),
+        meta: { requiresAuth: true }
+      },
+      {
+        path: '/menu/edit',
+        name: 'MenuEdit',
+        component: () => import(/* webpackChunkName: 'MenuEdit' */ '@/views/menu/edit.vue'),
         meta: { requiresAuth: true }
       },
       {
         path: '/resource',
-        name: 'resource',
-        component: () => import(/* webpackChunkName: 'resource' */ '@/views/resource/index.vue'),
+        name: 'ResourceIndex',
+        component: () => import(/* webpackChunkName: 'ResourceIndex' */ '@/views/resource/index.vue'),
         meta: { requiresAuth: true }
       },
       {

@@ -57,3 +57,30 @@ export const deleteMenu = (id: number) => {
     url: '/boss/menu/' + id
   })
 }
+
+/**
+ * 获取编辑菜单页面信息
+ * @param id
+ * @returns
+ */
+export const getEditMenuInfo = (id: number | string) => {
+  return request({
+    method: 'GET',
+    url: '/boss/menu/getEditMenuInfo',
+    params: {
+      id
+    }
+  })
+}
+
+/**
+ * 根据ID查询菜单
+ * @param id
+ * @returns
+ */
+export const getMenuInfoById = (id: number) => {
+  return request({
+    method: 'GET',
+    url: `/boss/menu/${id}`
+  })
+}
