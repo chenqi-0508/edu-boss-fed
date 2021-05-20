@@ -20,13 +20,16 @@
           </el-col>
           <el-col :span="6">
             <el-form-item>
-              <el-button type="primary" @click="onSubmit" :disabled="loading">查询</el-button>
+              <el-button type="primary" @click="onSubmit" :disabled="loading"
+                >查询</el-button
+              >
               <el-button @click="onReset" :disabled="loading">重置</el-button>
             </el-form-item>
           </el-col>
         </el-row>
       </el-form>
-      <el-button @click="dialogFormVisible = true" type="primary" size="small">添加角色</el-button
+      <el-button @click="handleAdd" type="primary" size="small"
+        >添加角色</el-button
       >
     </div>
     <el-table :data="roles" style="width: 100%" v-loading="loading">
@@ -44,8 +47,12 @@
           <el-button @click="allotResource(scope.row)" type="text" size="small"
             >分配资源</el-button
           >
-          <el-button type="text" size="small">编辑</el-button>
-          <el-button type="text" size="small">编辑</el-button>
+          <el-button @click="handleEdit(scope.row)" type="text" size="small"
+            >编辑</el-button
+          >
+          <el-button @click="handleDelete(scope.row)" type="text" size="small"
+            >删除</el-button
+          >
         </template>
       </el-table-column>
     </el-table>
@@ -63,6 +70,9 @@
 
     <el-dialog title="添加角色" :visible.sync="dialogFormVisible">
       <CreateOrEdit
+        v-if="dialogFormVisible"
+        :isEdit="isEdit"
+        :id="id"
         @handleCancle="cancleForm"
         @handleSubmit="submitForm"
       />
@@ -73,7 +83,7 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Form } from 'element-ui'
-import { getRolePages } from '@/services/role'
+import { getRolePages, delRoleById } from '@/services/role'
 import CreateOrEdit from './CreateOrEdit.vue'
 
 export default Vue.extend({
@@ -92,7 +102,9 @@ export default Vue.extend({
       },
       roles: [],
       loading: false,
-      dialogFormVisible: false
+      dialogFormVisible: false,
+      isEdit: false,
+      id: -1
     }
   },
   components: {
@@ -165,12 +177,54 @@ export default Vue.extend({
      */
     submitForm () {
       this.dialogFormVisible = false
+      this.loadAllRoles() // 重新加载数据
     },
     /**
      * 弹窗取消按钮
      */
     cancleForm () {
       this.dialogFormVisible = false
+    },
+    /**
+     * 编辑按钮
+     */
+    handleEdit (row: any) {
+      this.isEdit = true
+      this.id = row.id
+      this.dialogFormVisible = true
+    },
+    /**
+     * 删除按钮
+     */
+    handleDelete (row: any) {
+      this.$confirm('此操作将永久删除该角色, 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(async () => {
+        const { data } = await delRoleById(row.id)
+        if (data.code === '000000') {
+          this.loadAllRoles() // 重新加载数据
+          this.$message({
+            type: 'success',
+            message: '删除成功!'
+          })
+        } else {
+          this.$message.warning(data.mesg)
+        }
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '已取消删除'
+        })
+      })
+    },
+    /**
+     * 添加按钮
+     */
+    handleAdd () {
+      this.dialogFormVisible = true
+      this.isEdit = false
     }
   }
 })
