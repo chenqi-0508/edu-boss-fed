@@ -1,17 +1,18 @@
 <template>
-    <div></div>
+  <List/>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator'
-@Component({
-  name: 'Tets'
-})
-export default class Test extends Vue {
+import Vue from 'vue'
+import List from './components/List.vue'
 
-}
+export default Vue.extend({
+  name: 'RoleIndex',
+  components: {
+    List
+  }
+})
 </script>
 
 <style lang="scss" scoped>
-
 </style>

@@ -4,20 +4,18 @@
       <el-form ref="form" :model="form" label-width="80px">
         <el-row :gutter="20">
           <el-col :span="6">
-            <el-form-item label="资源名称">
+            <el-form-item label="角色编码">
+              <el-input v-model="form.code"></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :span="6">
+            <el-form-item label="角色名称">
               <el-input v-model="form.name"></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="6">
-            <el-form-item label="资源路径">
-              <el-input v-model="form.url"></el-input>
-            </el-form-item>
-          </el-col>
-          <el-col :span="6">
-            <el-form-item label="资源分类">
-              <el-select v-model="form.categoryId" placeholder="请选择资源分类" clearable>
-                <el-option v-for="item in categoryList" :key="item.id" :label="item.name" :value="item.id"></el-option>
-              </el-select>
+            <el-form-item label="角色描述">
+              <el-input v-model="form.description"></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="6">
@@ -29,12 +27,12 @@
         </el-row>
       </el-form>
     </div>
-    <el-table :data="recources" style="width: 100%" v-loading="loading">
-      <el-table-column prop="name" label="资源名称" min-width="90">
+    <el-table :data="roles" style="width: 100%" v-loading="loading">
+      <el-table-column prop="code" label="角色编码" min-width="90">
       </el-table-column>
-      <el-table-column prop="url" label="资源URL" min-width="120">
+      <el-table-column prop="name" label="角色名称" min-width="120">
       </el-table-column>
-      <el-table-column prop="description" label="资源描述"> </el-table-column>
+      <el-table-column prop="description" label="角色描述"> </el-table-column>
     </el-table>
     <el-pagination
       @size-change="handleSizeChange"
@@ -53,31 +51,28 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Form } from 'element-ui'
-import { getResourcePages, getResourceCategory } from '@/services/resource'
+import { getAllRoles } from '@/services/role'
 
 export default Vue.extend({
+  name: 'RoleList',
   data () {
     return {
       form: {
         name: '',
-        url: '',
-        categoryId: ''
+        code: '',
+        description: ''
       },
       page: {
         size: 10,
         total: 0,
         current: 1
       },
-      recources: [],
-      categoryList: [],
+      roles: [],
       loading: false
     }
   },
   created () {
-    // 查询资源列表
-    this.loadResourceList()
-    // 查询资源分类列表
-    this.loadResourceCategory()
+    this.loadAllRoles()
   },
   methods: {
     /**
@@ -86,39 +81,26 @@ export default Vue.extend({
     onSubmit () {
       console.log('submit!')
       this.page.current = 1
-      this.loadResourceList()
+      this.loadAllRoles()
     },
     /**
-     * 查询资源列表
+     * 获取角色列表
      */
-    async loadResourceList () {
+    async loadAllRoles () {
       this.loading = true
-      const { data } = await getResourcePages({
-        ...this.form,
-        ...this.page
-      })
+      const { data } = await getAllRoles()
+      console.log(data)
       if (data.code === '000000') {
-        this.recources = data.data.records
-        const { total, size, current } = data.data
-        this.page = { total, size, current }
+        this.roles = data.data
       }
       this.loading = false
-    },
-    /**
-     * 查询资源分类列表
-     */
-    async loadResourceCategory () {
-      const { data } = await getResourceCategory()
-      if (data.code === '000000') {
-        this.categoryList = data.data
-      }
     },
     /**
      * 页数点击
      */
     handleCurrentChange (val: number) {
       this.page.current = val
-      this.loadResourceList()
+      this.loadAllRoles()
     },
     /**
      * 设置分页数
@@ -126,7 +108,7 @@ export default Vue.extend({
     handleSizeChange (val: any) {
       console.log(`每页 ${val} 条`)
       this.page.size = val
-      this.loadResourceList()
+      this.loadAllRoles()
     },
     /**
      * 重置
@@ -139,4 +121,5 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
+
 </style>
