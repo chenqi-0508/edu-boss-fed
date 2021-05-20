@@ -14,3 +14,14 @@ export const getAllRoles = () => {
     url: '/boss/role/all'
   })
 }
+
+/**
+ * 获取所有角色
+ */
+export const getRolePages = (data: any) => {
+  return request({
+    method: 'POST',
+    url: '/boss/role/getRolePages',
+    data
+  })
+}
