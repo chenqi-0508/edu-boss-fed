@@ -30,7 +30,7 @@ export default Vue.extend({
       type: Boolean,
       default: false
     },
-    id: {
+    roleId: {
       type: Number,
       default: -1
     }
@@ -65,7 +65,7 @@ export default Vue.extend({
       }
     },
     async loadRole () {
-      const { data } = await getRoleById(this.id)
+      const { data } = await getRoleById(this.roleId)
       if (data.code === '000000') {
         this.role = { ...data.data }
       }

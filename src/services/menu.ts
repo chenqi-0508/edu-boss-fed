@@ -84,3 +84,41 @@ export const getMenuInfoById = (id: number) => {
     url: `/boss/menu/${id}`
   })
 }
+
+/**
+ * 获取所有菜单并按层级展示
+ */
+export const getMenuNodeList = () => {
+  return request({
+    method: 'GET',
+    url: '/boss/menu/getMenuNodeList'
+  })
+}
+
+/**
+ * 获取角色拥有的菜单列表
+ */
+export const getRoleMenus = (id: number|string) => {
+  return request({
+    method: 'GET',
+    url: '/boss/menu/getRoleMenus',
+    params: {
+      roleId: id
+    }
+  })
+}
+
+/**
+ * 给角色分配菜单
+ */
+interface allocateRoleMenuForm {
+  roleId: number,
+  menuIdList: Array<any>
+}
+export const allocateRoleMenus = (data: allocateRoleMenuForm) => {
+  return request({
+    method: 'POST',
+    url: '/boss/menu/allocateRoleMenus',
+    data
+  })
+}

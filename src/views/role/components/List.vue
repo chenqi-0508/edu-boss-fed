@@ -68,11 +68,11 @@
     >
     </el-pagination>
 
-    <el-dialog title="添加角色" :visible.sync="dialogFormVisible">
+    <el-dialog :title="isEdit ? '编辑角色' : '添加角色'" :visible.sync="dialogFormVisible">
       <CreateOrEdit
         v-if="dialogFormVisible"
-        :isEdit="isEdit"
-        :id="id"
+        :is-edit="isEdit"
+        :role-id="roleId"
         @handleCancle="cancleForm"
         @handleSubmit="submitForm"
       />
@@ -104,7 +104,7 @@ export default Vue.extend({
       loading: false,
       dialogFormVisible: false,
       isEdit: false,
-      id: -1
+      roleId: -1
     }
   },
   components: {
@@ -164,7 +164,12 @@ export default Vue.extend({
      * 分配菜单
      */
     allotMenu (row: any) {
-      console.log(row)
+      this.$router.push({
+        name: 'alloc-menu',
+        params: {
+          roleId: row.id
+        }
+      })
     },
     /**
      * 分配资源
@@ -190,7 +195,7 @@ export default Vue.extend({
      */
     handleEdit (row: any) {
       this.isEdit = true
-      this.id = row.id
+      this.roleId = row.id
       this.dialogFormVisible = true
     },
     /**
