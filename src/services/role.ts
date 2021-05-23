@@ -48,11 +48,46 @@ export const getRoleById = (id: number) => {
 }
 
 /**
- * 查询用户角色
+ * 删除用户角色
  */
 export const delRoleById = (id: number) => {
   return request({
     method: 'DELETE',
     url: `/boss/role/${id}`
+  })
+}
+
+/**
+ * 查询用户角色
+ */
+export const getUserRole = (id: number) => {
+  return request({
+    method: 'GET',
+    url: `/boss/role/user/${id}`
+  })
+}
+
+/**
+ * 获取所有角色
+ */
+export const getRolesAll = () => {
+  return request({
+    method: 'GET',
+    url: '/boss/role/all'
+  })
+}
+
+/**
+ * 给用户分配角色
+ */
+interface allocateUserRoleForm {
+  userId: number
+  roleIdList: Array<any>
+}
+export const allocateUserRoles = (data: allocateUserRoleForm) => {
+  return request({
+    method: 'POST',
+    url: '/boss/role/allocateUserRoles',
+    data
   })
 }

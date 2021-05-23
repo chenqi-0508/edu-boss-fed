@@ -23,3 +23,22 @@ export const getUserInfo = () => {
     url: '/front/user/getInfo'
   })
 }
+
+/**
+ * 分页查询用户信息
+ */
+interface userQueryParam {
+  currentPage: number
+  pageSize: number
+  phone: number | string
+  userId: number
+  startCreateTime: string
+  endCreateTime: string
+}
+export const getUserPages = (data: userQueryParam) => {
+  return request({
+    method: 'POST',
+    url: '/boss/user/getUserPages',
+    data
+  })
+}

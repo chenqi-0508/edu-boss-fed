@@ -92,6 +92,7 @@ export default Vue.extend({
   display: flex;
   align-items: center;
   justify-content: center;
+  background-image: url('../../assets/img/bg.jpg');
   .login-form {
     width: 300px;
     border-radius: 5px;

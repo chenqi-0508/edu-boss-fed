@@ -131,7 +131,6 @@ export default Vue.extend({
         ...this.form,
         ...this.page
       })
-      console.log(data)
       if (data.code === '000000') {
         this.roles = data.data.records
         const { total } = data.data
@@ -175,7 +174,12 @@ export default Vue.extend({
      * 分配资源
      */
     allotResource (row: any) {
-      console.log(row)
+      this.$router.push({
+        name: 'alloc-resource',
+        params: {
+          roleId: row.id
+        }
+      })
     },
     /**
      * 提交弹窗表单

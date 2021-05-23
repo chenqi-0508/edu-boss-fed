@@ -35,33 +35,46 @@ const routes: Array<RouteConfig> = [
         props: true
       },
       {
+        path: '/role/:roleId/alloc-resource',
+        name: 'alloc-resource',
+        component: () => import(/* webpackChunkName: 'alloc-resource' */ '@/views/role/alloc-resource.vue'),
+        meta: { requiresAuth: true },
+        props: true
+      },
+      {
         path: '/menu',
-        name: 'MenuIndex',
-        component: () => import(/* webpackChunkName: 'MenuIndex' */ '@/views/menu/index.vue'),
+        name: 'menu',
+        component: () => import(/* webpackChunkName: 'menu' */ '@/views/menu/index.vue'),
         meta: { requiresAuth: true }
       },
       {
         path: '/menu/create',
-        name: 'MenuCreate',
-        component: () => import(/* webpackChunkName: 'MenuCreate' */ '@/views/menu/create.vue'),
+        name: 'menu-create',
+        component: () => import(/* webpackChunkName: 'menu-create' */ '@/views/menu/create.vue'),
         meta: { requiresAuth: true }
       },
       {
-        path: '/menu/edit',
-        name: 'MenuEdit',
-        component: () => import(/* webpackChunkName: 'MenuEdit' */ '@/views/menu/edit.vue'),
+        path: '/menu/:id/edit',
+        name: 'menu-edit',
+        component: () => import(/* webpackChunkName: 'menu-edit' */ '@/views/menu/edit.vue'),
         meta: { requiresAuth: true }
       },
       {
         path: '/resource',
-        name: 'ResourceIndex',
-        component: () => import(/* webpackChunkName: 'ResourceIndex' */ '@/views/resource/index.vue'),
+        name: 'resource',
+        component: () => import(/* webpackChunkName: 'resource' */ '@/views/resource/index.vue'),
         meta: { requiresAuth: true }
       },
       {
         path: '/course',
         name: 'course',
         component: () => import(/* webpackChunkName: 'course' */ '@/views/course/index.vue'),
+        meta: { requiresAuth: true }
+      },
+      {
+        path: '/course/create',
+        name: 'course-create',
+        component: () => import(/* webpackChunkName: 'course-create' */ '@/views/course/course-create.vue'),
         meta: { requiresAuth: true }
       },
       {

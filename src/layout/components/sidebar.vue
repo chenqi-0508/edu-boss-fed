@@ -12,24 +12,24 @@
           <i class="el-icon-lock"></i>
           <span>权限管理</span>
         </template>
-        <el-menu-item index="role">
+        <el-menu-item index="/role">
           <i class="el-icon-lock"></i>
           <span>⻆⾊列表</span>
         </el-menu-item>
-        <el-menu-item index="menu">
+        <el-menu-item index="/menu">
           <i class="el-icon-lock"></i>
           <span>菜单列表</span>
         </el-menu-item>
-        <el-menu-item index="resource">
+        <el-menu-item index="/resource">
           <i class="el-icon-lock"></i>
           <span>资源列表</span>
         </el-menu-item>
       </el-submenu>
-      <el-menu-item index="course">
+      <el-menu-item index="/course">
         <i class="el-icon-film"></i>
         <span slot="title">课程管理</span>
       </el-menu-item>
-      <el-menu-item index="user">
+      <el-menu-item index="/user">
         <i class="el-icon-user"></i>
         <span slot="title">⽤户管理</span>
       </el-menu-item>
@@ -38,11 +38,11 @@
           <i class="el-icon-location"></i>
           <span>⼴告管理</span>
         </template>
-        <el-menu-item index="advert">
+        <el-menu-item index="/advert">
           <i class="el-icon-menu"></i>
           <span>⼴告列表</span>
         </el-menu-item>
-        <el-menu-item index="advert-space">
+        <el-menu-item index="/advert-space">
           <i class="el-icon-menu"></i>
           <span>⼴告位列表</span>
         </el-menu-item>

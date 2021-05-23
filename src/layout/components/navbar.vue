@@ -53,7 +53,6 @@ export default Vue.extend({
     },
     async getUserInfoHandle () {
       const { data } = await getUserInfo()
-      console.log(data)
       this.userInfo = data.content
     }
   }

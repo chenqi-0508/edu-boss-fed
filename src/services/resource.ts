@@ -1,7 +1,7 @@
 import request from '@/utils/request'
 
 /**
- * 获取用户基本信息
+ * 按条件分页查询资源
  */
 export const getResourcePages = (data: any) => {
   return request({
@@ -12,7 +12,7 @@ export const getResourcePages = (data: any) => {
 }
 
 /**
- * 获取用户基本信息
+ * 查询资源分类列表
  */
 export const getResourceCategory = (resourceId?: any) => {
   return request({
@@ -21,5 +21,43 @@ export const getResourceCategory = (resourceId?: any) => {
     params: {
       resourceId
     }
+  })
+}
+
+/**
+ * 获取所有资源
+ */
+export const getResourceNodeList = () => {
+  return request({
+    method: 'GET',
+    url: '/boss/resource/getAll'
+  })
+}
+
+/**
+ * 获取角色拥有的资源列表
+ */
+export const getRoleResources = (roleId: number | string) => {
+  return request({
+    method: 'GET',
+    url: '/boss/resource/getRoleResources',
+    params: {
+      roleId
+    }
+  })
+}
+
+/**
+ * 给角色分配资源
+ */
+interface allocateRoleResourceForm {
+  roleId: number | string
+  resourceIdList: Array<any>
+}
+export const allocateRoleResources = (data: allocateRoleResourceForm) => {
+  return request({
+    method: 'POST',
+    url: '/boss/resource/allocateRoleResources',
+    data
   })
 }

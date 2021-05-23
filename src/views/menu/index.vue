@@ -46,7 +46,7 @@ export default Vue.extend({
      */
     createMenu () {
       this.$router.push({
-        name: 'MenuCreate'
+        name: 'menu-create'
       })
     },
     /**
@@ -63,7 +63,7 @@ export default Vue.extend({
      */
     handleEdit (row: any) {
       this.$router.push({
-        name: 'MenuEdit',
+        name: 'menu-edit',
         params: {
           id: row.id
         }

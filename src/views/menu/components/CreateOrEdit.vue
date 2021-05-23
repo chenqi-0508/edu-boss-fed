@@ -78,7 +78,6 @@ export default Vue.extend({
     async onSubmit () {
       console.log('submit!')
       const { data } = await createOrUpdateMenu(this.form)
-      console.log(data)
       if (data.code === '000000') {
         this.$message.success('添加成功！')
         this.$router.back()
