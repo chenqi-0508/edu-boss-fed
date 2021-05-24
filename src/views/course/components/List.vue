@@ -10,7 +10,14 @@
           </el-col>
           <el-col :span="6">
             <el-form-item label="状态" prop="status">
-              <el-input v-model="form.status"></el-input>
+              <el-select v-model="form.status" placeholder="请选择">
+                <el-option
+                  v-for="item in statusOptions"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value">
+                </el-option>
+              </el-select>
             </el-form-item>
           </el-col>
           <el-col :span="4">
@@ -50,9 +57,19 @@
         </template>
       </el-table-column>
       <el-table-column fixed="right" label="操作" width="200">
-        <template>
-          <el-button type="text" size="small">编辑</el-button>
-          <el-button type="text" size="small">内容管理</el-button>
+        <template slot-scope="scope">
+          <el-button type="text" size="small" @click="$router.push({
+            name: 'course-edit',
+            params: {
+              courseId: scope.row.id
+            }
+          })">编辑</el-button>
+          <el-button type="text" size="small" @click="$router.push({
+            name: 'course-section',
+            params: {
+              courseId: scope.row.id
+            }
+          })">内容管理</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -112,7 +129,16 @@ export default Vue.extend({
       },
       courseRoles: [],
       currentCourseId: 0,
-      options: []
+      statusOptions: [
+        {
+          label: '上架',
+          value: 1
+        },
+        {
+          label: '下架',
+          value: 0
+        }
+      ]
     }
   },
   created () {
