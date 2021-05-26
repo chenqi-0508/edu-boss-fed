@@ -122,7 +122,7 @@
         <!-- 课程详情 -->
         <div v-show="activeStep === 4">
           <el-form-item label="课程详情">
-            <el-input v-model="course.courseDescriptionMarkDown"></el-input>
+            <text-editor v-model="course.courseDescriptionMarkDown"/>
           </el-form-item>
           <el-form-item label="是否发布">
             <el-switch
@@ -149,11 +149,13 @@
 import Vue from 'vue'
 import CourseImg from './components/CourseImg.vue'
 import { saveOrUpdateCourse } from '@/services/course'
+import TextEditor from '@/components/TextEditor/index.vue'
 
 export default Vue.extend({
   name: 'CourseCreate',
   components: {
-    CourseImg
+    CourseImg,
+    TextEditor
   },
   data () {
     return {

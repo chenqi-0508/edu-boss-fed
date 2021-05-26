@@ -13,13 +13,13 @@
               <el-input v-model="form.status"></el-input>
             </el-form-item>
           </el-col>
-          <el-col :span="4">
+          <el-col :span="6">
             <el-form-item>
               <el-button type="primary" @click="onSubmit" :disabled="loading">查询</el-button>
               <el-button @click="onReset">重置</el-button>
             </el-form-item>
           </el-col>
-          <el-col :span="4" :offset="4">
+          <el-col :span="4" :offset="2">
             <el-form-item>
               <el-button type="primary" @click="$router.push({name: 'course-create'})">添加课程</el-button>
             </el-form-item>

@@ -64,7 +64,7 @@ export const saveOrUpdateCourse = (data: any) => {
  * @param data
  * @returns
  */
-export const CourseImgUpload = (data: any, onUploadProgress: (progressEvent: any) => void) => {
+export const CourseImgUpload = (data: any, onUploadProgress?: (progressEvent: any) => void) => {
   return request({
     method: 'POST',
     url: '/boss/course/upload',
