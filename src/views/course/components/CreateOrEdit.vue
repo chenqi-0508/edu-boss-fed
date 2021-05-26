@@ -1,7 +1,5 @@
 <template>
-  <div>
-    <el-page-header @back="goBack" content="详情页面">
-    </el-page-header>
+  <div class="create-or-edit">
     <el-card class="box-card" style="margin-top: 20px;">
       <div slot="header" class="clearfix">
         <el-steps :active="activeStep" simple>
@@ -147,15 +145,24 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import CourseImg from './components/CourseImg.vue'
-import { saveOrUpdateCourse } from '@/services/course'
+import CourseImg from './CourseImg.vue'
+import { saveOrUpdateCourse, getCourseById } from '@/services/course'
 import TextEditor from '@/components/TextEditor/index.vue'
 
 export default Vue.extend({
-  name: 'CourseCreate',
+  name: 'CreateOrEditCourse',
   components: {
     CourseImg,
     TextEditor
+  },
+  props: {
+    isEdit: {
+      type: Boolean,
+      default: false
+    },
+    courseId: {
+      type: [Number, String]
+    }
   },
   data () {
     return {
@@ -222,14 +229,22 @@ export default Vue.extend({
       imageUrl: ''
     }
   },
+  created () {
+    if (this.isEdit) {
+      this.initCourseInfo()
+    }
+  },
   methods: {
-    goBack () {
-      this.$router.back()
+    async initCourseInfo () {
+      const { data } = await getCourseById(this.courseId)
+      if (data.code === '000000') {
+        this.course = data.data
+      }
     },
     async handleSaveCourse () {
       const { data } = await saveOrUpdateCourse(this.course)
       if (data.code === '000000') {
-        this.$message.success('课程添加成功！')
+        this.$message.success(`课程${this.isEdit ? '更新' : '添加'}成功！`)
         this.$router.back()
       } else {
         this.$message.warning(data.mesg)
