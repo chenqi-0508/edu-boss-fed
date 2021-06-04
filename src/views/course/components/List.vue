@@ -84,25 +84,6 @@
       :disabled="loading"
     >
     </el-pagination>
-
-    <el-dialog
-      title="分配角色"
-      :visible.sync="dialogVisible"
-      width="30%"
-      :before-close="handleClose">
-      <el-select v-model="courseRoles" multiple placeholder="请选择">
-        <el-option
-          v-for="item in options"
-          :key="item.id"
-          :label="item.name"
-          :value="item.id">
-        </el-option>
-      </el-select>
-      <span slot="footer" class="dialog-footer">
-        <el-button @click="dialogVisible = false">取 消</el-button>
-        <el-button type="primary" @click="handleSaveCourseRole">确 定</el-button>
-      </span>
-    </el-dialog>
   </el-card>
 </template>
 
@@ -116,7 +97,6 @@ export default Vue.extend({
   data () {
     return {
       loading: false,
-      dialogVisible: false,
       form: {
         courseName: '',
         status: ''
@@ -171,23 +151,6 @@ export default Vue.extend({
       row.isStatusLoading = false
       this.$message.success(`${row.status === 0 ? '下架' : '上架'}成功！`)
     },
-    // 分配角色按钮
-    // handleAllocRole (row: any) {
-    //   this.currentCourseId = row.id
-    //   this.loadRolesAll()
-    //   this.loadCourseRole()
-    //   this.dialogVisible = true
-    // },
-    // // 加载所有角色
-    // async loadRolesAll () {
-    //   const { data } = await getRolesAll()
-    //   this.options = data.data
-    // },
-    // // 加载该用户的角色
-    // async loadCourseRole () {
-    //   const { data: { data: courseRoleList } } = await getCourseRole(this.currentCourseId)
-    //   this.courseRoles = courseRoleList.map((role: any) => role.id)
-    // },
     // 加载用户信息
     async loadCourseList () {
       this.loading = true
@@ -203,17 +166,6 @@ export default Vue.extend({
       this.page.currentPage = current
       this.page.total = total
       this.loading = false
-    },
-    // 保存分配的角色
-    async handleSaveCourseRole () {
-      // const { data } = await allocateCourseRoles({
-      //   courseId: this.currentCourseId,
-      //   roleIdList: this.courseRoles
-      // })
-      // if (data.code === '000000') {
-      //   this.$message.success('操作成功！')
-      //   this.dialogVisible = false
-      // }
     },
     handleClose () {
       console.log('object')
