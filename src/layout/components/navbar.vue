@@ -7,7 +7,7 @@
       icon="el-icon-s-unfold"
     ></el-button>
     <el-breadcrumb separator="/" replace>
-      <el-breadcrumb-item :to="{ name: 'Home' }">Home</el-breadcrumb-item>
+      <el-breadcrumb-item :to="{ path: '/' }">Home</el-breadcrumb-item>
       <el-breadcrumb-item>Item 1</el-breadcrumb-item>
       <el-breadcrumb-item>Item 2</el-breadcrumb-item>
     </el-breadcrumb>

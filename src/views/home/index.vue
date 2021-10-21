@@ -1,10 +1,6 @@
 <template>
     <div>
       <h1>home</h1>
-      <el-tooltip class="item" effect="dark" :content="inputVal" placement="top-start" :disabled="!toolTipShow">
-        <el-input :disabled="true" v-model="inputVal"></el-input>
-      </el-tooltip>
-      <el-button @click="toolTipShow = !toolTipShow">change toolTipShow</el-button>
     </div>
 </template>
 
@@ -19,11 +15,6 @@ export default Vue.extend({
       toolTipShow: false
     }
   }
-  // watch: {
-  //   toolTipShow() {
-
-  //   }
-  // }
 })
 </script>
 
